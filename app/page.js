@@ -10,13 +10,16 @@ import {
   Trash2, TrendingUp, User, UserPlus, Users, Waves, X
 } from "lucide-react";
 
+const BASE_PATH = process.env.NEXT_PUBLIC_BASE_PATH || "";
+const asset = (path) => `${BASE_PATH}${path}`;
+
 const BASE_TOURS = [
-  { id: 1, title: "Blue Hole & Secret Falls", location: "Ocho Rios", category: "Adventure", duration: "5 hours", price: 129, rating: 4.9, reviews: 184, image: "/images/blue-hole.jpg", badge: "Bestseller", description: "Swim in turquoise pools, climb hidden waterfalls, and discover one of Jamaica’s most refreshing natural escapes.", includes: ["Private round-trip transfer", "Local guide", "Entry fees", "Bottled water"] },
-  { id: 2, title: "Kingston Culture Walk", location: "Kingston", category: "Culture", duration: "3 hours", price: 65, rating: 4.8, reviews: 96, image: "/images/walking-one.jpg", badge: "Local favourite", description: "See Kingston through local eyes—music, murals, markets, architecture, and stories beyond the guidebooks.", includes: ["Expert city guide", "Local tasting", "Museum entry", "Small group"] },
-  { id: 3, title: "Rose Hall After Dark", location: "Montego Bay", category: "History", duration: "3.5 hours", price: 92, rating: 4.7, reviews: 121, image: "/images/rose-hall.jpg", badge: "Iconic", description: "Explore Jamaica’s legendary great house at twilight and hear the unforgettable story of the White Witch.", includes: ["Hotel pickup", "Guided great-house tour", "Welcome drink", "Return transfer"] },
-  { id: 4, title: "Island Flavours & Coast", location: "Negril", category: "Food & culture", duration: "6 hours", price: 145, rating: 5.0, reviews: 77, image: "/images/tour-beach.jpg", badge: "New", description: "A relaxed day of coastal views, local food, colourful communities, and one of the Caribbean’s best sunsets.", includes: ["Private driver", "Lunch tasting", "Beach stop", "Sunset experience"] },
-  { id: 5, title: "Hidden Jamaica Discovery", location: "Falmouth", category: "Nature", duration: "4 hours", price: 110, rating: 4.9, reviews: 58, image: "/images/walking-two.jpg", badge: "Private tour", description: "Leave the resort road behind for lush countryside, river views, and meaningful encounters with local Jamaica.", includes: ["Private guide", "Air-conditioned transfer", "Refreshments", "Flexible itinerary"] },
-  { id: 6, title: "Falls, River & Village Day", location: "Montego Bay", category: "Adventure", duration: "7 hours", price: 165, rating: 4.8, reviews: 143, image: "/images/tour-falls.jpg", badge: "Full day", description: "A full-day island adventure combining cool river water, dramatic falls, and warm Jamaican hospitality.", includes: ["Hotel pickup", "All admissions", "Jamaican lunch", "Certified guide"] }
+  { id: 1, title: "Blue Hole & Secret Falls", location: "Ocho Rios", category: "Adventure", duration: "5 hours", price: 129, rating: 4.9, reviews: 184, image: asset("/images/blue-hole.jpg"), badge: "Bestseller", description: "Swim in turquoise pools, climb hidden waterfalls, and discover one of Jamaica’s most refreshing natural escapes.", includes: ["Private round-trip transfer", "Local guide", "Entry fees", "Bottled water"] },
+  { id: 2, title: "Kingston Culture Walk", location: "Kingston", category: "Culture", duration: "3 hours", price: 65, rating: 4.8, reviews: 96, image: asset("/images/walking-one.jpg"), badge: "Local favourite", description: "See Kingston through local eyes—music, murals, markets, architecture, and stories beyond the guidebooks.", includes: ["Expert city guide", "Local tasting", "Museum entry", "Small group"] },
+  { id: 3, title: "Rose Hall After Dark", location: "Montego Bay", category: "History", duration: "3.5 hours", price: 92, rating: 4.7, reviews: 121, image: asset("/images/rose-hall.jpg"), badge: "Iconic", description: "Explore Jamaica’s legendary great house at twilight and hear the unforgettable story of the White Witch.", includes: ["Hotel pickup", "Guided great-house tour", "Welcome drink", "Return transfer"] },
+  { id: 4, title: "Island Flavours & Coast", location: "Negril", category: "Food & culture", duration: "6 hours", price: 145, rating: 5.0, reviews: 77, image: asset("/images/tour-beach.jpg"), badge: "New", description: "A relaxed day of coastal views, local food, colourful communities, and one of the Caribbean’s best sunsets.", includes: ["Private driver", "Lunch tasting", "Beach stop", "Sunset experience"] },
+  { id: 5, title: "Hidden Jamaica Discovery", location: "Falmouth", category: "Nature", duration: "4 hours", price: 110, rating: 4.9, reviews: 58, image: asset("/images/walking-two.jpg"), badge: "Private tour", description: "Leave the resort road behind for lush countryside, river views, and meaningful encounters with local Jamaica.", includes: ["Private guide", "Air-conditioned transfer", "Refreshments", "Flexible itinerary"] },
+  { id: 6, title: "Falls, River & Village Day", location: "Montego Bay", category: "Adventure", duration: "7 hours", price: 165, rating: 4.8, reviews: 143, image: asset("/images/tour-falls.jpg"), badge: "Full day", description: "A full-day island adventure combining cool river water, dramatic falls, and warm Jamaican hospitality.", includes: ["Hotel pickup", "All admissions", "Jamaican lunch", "Certified guide"] }
 ];
 
 const SEED_BOOKINGS = [
@@ -28,7 +31,7 @@ const SEED_BOOKINGS = [
 const categories = ["All experiences", "Adventure", "Culture", "Nature", "History", "Food & culture"];
 
 function Logo() {
-  return <button className="brand" onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}><img src="/images/logo.png" alt="Love Travel Jamaica" /></button>;
+  return <button className="brand" onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}><img src={asset("/images/logo.png")} alt="Love Travel Jamaica" /></button>;
 }
 
 function Modal({ open, onClose, children, wide = false }) {
@@ -150,7 +153,7 @@ export default function Home() {
       id: Date.now(), title: form.get("title"), location: form.get("location"),
       category: form.get("category"), duration: form.get("duration"),
       price: Number(form.get("price")), rating: 5.0, reviews: 0,
-      image: "/images/tour-local.jpg", badge: "Just added",
+      image: asset("/images/tour-local.jpg"), badge: "Just added",
       description: form.get("description") || "A new locally guided Jamaican experience.",
       includes: ["Local guide", "Guest support", "Flexible experience"]
     };
@@ -185,7 +188,7 @@ export default function Home() {
       </div>
     </header>
 
-    <section className="hero" style={{ backgroundImage: 'url("/images/hero.jpg")' }}>
+    <section className="hero" style={{ backgroundImage: `url("${asset("/images/hero.jpg")}")` }}>
       <div className="hero-overlay" />
       <div className="wrap hero-content">
         <span className="kicker light"><Palmtree size={15} /> Go beyond the resort</span>
@@ -230,7 +233,7 @@ export default function Home() {
     </section>
 
     <section className="section why wrap" id="why-us">
-      <div className="why-image" style={{ backgroundImage: 'url("/images/walking-two.jpg")' }}><span className="floating-review"><Stars rating="5.0" reviews="2,400+" /><b>“The Jamaica we hoped to find.”</b><small>— Claire, Toronto</small></span></div>
+      <div className="why-image" style={{ backgroundImage: `url("${asset("/images/walking-two.jpg")}")` }}><span className="floating-review"><Stars rating="5.0" reviews="2,400+" /><b>“The Jamaica we hoped to find.”</b><small>— Claire, Toronto</small></span></div>
       <div className="why-copy"><span className="kicker">Travel with heart</span><h2>Not just a tour.<br /><em>A local connection.</em></h2><p>We started Love Travel Jamaica to share the island we know: generous, creative, surprising, and full of stories. Every booking supports local guides and communities.</p>
         <div className="why-list"><div><span><Users /></span><div><b>People, not scripts</b><p>Warm, knowledgeable guides who make every day personal.</p></div></div><div><span><Map /></span><div><b>Plans with breathing room</b><p>Thoughtful itineraries, flexible pacing, zero tourist traps.</p></div></div><div><span><ShieldCheck /></span><div><b>Looked after, always</b><p>Clear pricing, reliable transport, and support whenever you need it.</p></div></div></div>
       </div>
