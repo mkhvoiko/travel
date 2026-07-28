@@ -91,7 +91,11 @@ export default function Home() {
     const savedLanguage = localStorage.getItem("ltj-language");
     const requestedLanguage = new URLSearchParams(window.location.search).get("lang");
     const browserLanguages = [navigator.language, ...(navigator.languages || [])].filter(Boolean);
-    const preferredLanguage = browserLanguages.some((item) => item.toLowerCase().startsWith("ru")) ? "ru" : "en";
+    const firstSupportedLanguage = browserLanguages.find((item) => {
+      const normalizedLanguage = item.toLowerCase();
+      return normalizedLanguage.startsWith("en") || normalizedLanguage.startsWith("ru");
+    });
+    const preferredLanguage = firstSupportedLanguage?.toLowerCase().startsWith("ru") ? "ru" : "en";
     if (savedUser) setUser(JSON.parse(savedUser));
     if (savedBookings) setBookings(JSON.parse(savedBookings));
     setLanguage(
