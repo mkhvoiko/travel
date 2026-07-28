@@ -15,7 +15,7 @@
 
 * { box-sizing: border-box; }
 html { scroll-behavior: smooth; }
-body { margin: 0; background: var(--paper); color: var(--ink); font-family: Inter, "Helvetica Neue", Arial, sans-serif; }
+body { margin: 0; overflow-x: clip; background: var(--paper); color: var(--ink); font-family: var(--font-manrope), "Helvetica Neue", Arial, sans-serif; font-size: 16px; line-height: 1.55; }
 body:has(.modal-backdrop) { overflow: hidden; }
 button, input, select, textarea { font: inherit; }
 button, a { -webkit-tap-highlight-color: transparent; }
@@ -50,7 +50,7 @@ img { display: block; max-width: 100%; }
 .kicker { color: #317e6e; display: inline-flex; align-items: center; gap: 7px; text-transform: uppercase; letter-spacing: .16em; font-size: 10px; font-weight: 900; }
 .kicker.light { color: var(--lime); }
 .hero h1 { font-size: clamp(62px, 7vw, 96px); line-height: .9; letter-spacing: -.065em; margin: 18px 0 24px; max-width: 700px; }
-h1, h2, h3, h4 { font-family: "Arial Rounded MT Bold", Inter, Arial, sans-serif; margin: 0; }
+h1, h2, h3, h4 { font-family: var(--font-manrope), "Helvetica Neue", Arial, sans-serif; margin: 0; }
 h1 em, h2 em { color: var(--sun); font-style: normal; }
 .hero-content > p { max-width: 610px; color: #e0ebe7; line-height: 1.6; font-size: 18px; margin: 0; }
 .hero-proof { display: flex; gap: 26px; margin-top: 30px; font-size: 12px; color: #d4e1dc; }
@@ -99,7 +99,7 @@ h1 em, h2 em { color: var(--sun); font-style: normal; }
 .tour-meta > span { display: flex; align-items: center; gap: 4px; }
 .stars { display: inline-flex; gap: 4px; align-items: center; color: #e0a91c; font-size: 10px; }
 .stars small { color: #8b9894; }
-.tour-title { border: 0; background: transparent; padding: 0; text-align: left; font-size: 18px; font-weight: 900; font-family: "Arial Rounded MT Bold", Inter, sans-serif; margin: 12px 0 18px; cursor: pointer; }
+.tour-title { border: 0; background: transparent; padding: 0; text-align: left; font-size: 18px; font-weight: 900; font-family: var(--font-manrope), "Helvetica Neue", Arial, sans-serif; margin: 12px 0 18px; cursor: pointer; }
 .tour-title:hover { color: #237a69; }
 .tour-footer { display: flex; align-items: center; justify-content: space-between; border-top: 1px solid #edf0ec; padding-top: 14px; }
 .tour-footer > span { display: flex; gap: 5px; align-items: center; color: var(--muted); font-size: 10px; }
@@ -324,6 +324,115 @@ td small { display: block; color: var(--muted); margin-top: 3px; }
 .admin-tour-grid article footer button { border: 0; background: transparent; color: #a26862; cursor: pointer; }
 .admin-tour-grid article footer svg { width: 14px; }
 
+/* Readable, conversion-focused type scale */
+.utility { font-size: 13px; }
+.utility-inner { height: 36px; }
+.nav { height: 88px; }
+.brand { width: 164px; }
+.brand img { height: 68px; }
+.nav-links a, .account-link { font-size: 15px; }
+.nav-links a { padding-block: 12px; }
+.mobile-account { display: none; }
+.button { min-height: 48px; border-radius: 12px; padding: 13px 22px; font-size: 15px; }
+.kicker { font-size: 12px; line-height: 1.4; letter-spacing: .14em; }
+.hero { min-height: 680px; }
+.hero h1 { max-width: 860px; font-size: clamp(54px, 6.5vw, 88px); line-height: .96; letter-spacing: -.055em; }
+.mobile-break { display: none; }
+.hero-content > p { max-width: 650px; font-size: 19px; line-height: 1.65; }
+.hero-proof { gap: 28px; font-size: 14px; }
+.hero-proof svg { width: 19px; height: 19px; }
+.search-panel { bottom: -78px; border-radius: 20px; }
+.search-tabs { height: 58px; padding-left: 18px; }
+.search-tabs button { min-height: 58px; font-size: 14px; padding-inline: 18px; }
+.search-grid { padding: 24px; gap: 14px; }
+.field { gap: 8px; margin-bottom: 18px; }
+.field > span { font-size: 13px; line-height: 1.35; }
+.field input, .field select, .field textarea { min-height: 50px; border-radius: 10px; padding: 13px 14px; font-size: 16px; }
+.search-button { height: 50px; }
+.trust-strip { padding: 118px 0 38px; }
+.trust-grid strong { font-size: 20px; }
+.trust-grid span { font-size: 14px; }
+.section { padding: 96px 0; }
+.section-head { margin-bottom: 46px; }
+.section-head h2, .why-copy h2, .transfer-copy h2 { font-size: clamp(42px, 4.2vw, 60px); line-height: 1.03; }
+.section-head > p { max-width: 470px; font-size: 16px; line-height: 1.7; }
+.tour-tools { margin-bottom: 30px; }
+.category-pills button { min-height: 44px; padding: 10px 17px; font-size: 14px; }
+.mini-search { min-width: 240px; min-height: 46px; padding-inline: 14px; border-radius: 10px; }
+.mini-search input { font-size: 15px; }
+.tour-grid { gap: 24px; }
+.tour-card { border-radius: 18px; }
+.tour-image { height: 244px; }
+.tour-badge { font-size: 11px; padding: 8px 11px; }
+.heart { width: 40px; height: 40px; }
+.tour-body { padding: 22px 22px 0; }
+.tour-meta, .stars { font-size: 13px; }
+.tour-title { font-size: 21px; line-height: 1.28; margin: 14px 0 20px; }
+.tour-footer > span { font-size: 14px; }
+.tour-footer small { font-size: 12px; }
+.tour-footer b { font-size: 20px; }
+.book-line { min-height: 52px; width: calc(100% + 44px); margin-left: -22px; padding-inline: 22px; font-size: 14px; }
+.transfer-card { gap: 90px; }
+.transfer-copy > p, .why-copy > p { font-size: 17px; line-height: 1.75; }
+.transfer-points { gap: 14px; font-size: 15px; }
+.transfer-form { padding: 36px; border-radius: 20px; }
+.transfer-form > span { font-size: 12px; }
+.transfer-form h3 { font-size: 27px; margin-top: 9px; }
+.why-list b { font-size: 16px; }
+.why-list p { font-size: 14px; line-height: 1.65; }
+.floating-review { width: 270px; padding: 23px; }
+.floating-review b { font-size: 16px; }
+.floating-review small { font-size: 13px; }
+.story-grid article > div b { font-size: 14px; }
+.whatsapp { min-height: 44px; font-size: 14px; }
+.footer-brand p, .footer-grid > div:not(.footer-brand) { font-size: 14px; }
+.footer-brand > span, .footer-grid > div > b { font-size: 14px; }
+.footer-grid { line-height: 1.6; }
+.footer-bottom { font-size: 12px; }
+.subscribe input { min-height: 46px; font-size: 14px; }
+.modal { border-radius: 20px; }
+.modal h2 { font-size: 34px; line-height: 1.15; }
+.modal-intro, .form-between, .auth-switch, .terms { font-size: 14px; }
+.toast { font-size: 14px; }
+.detail-image > span { font-size: 11px; }
+.detail-copy h2 { font-size: 40px; }
+.detail-copy > p { font-size: 16px; }
+.detail-facts span, .detail-copy li { font-size: 14px; }
+.detail-copy h4 { font-size: 15px; }
+.detail-price small, .detail-price span { font-size: 12px; }
+.booking-summary h3 { font-size: 23px; }
+.booking-summary > p, .booking-total span { font-size: 14px; }
+.booking-total small, .guest-control small, .secure-note { font-size: 12px; }
+.booking-steps span { width: 30px; height: 30px; font-size: 12px; }
+.customer-panel aside h3 { font-size: 16px; }
+.customer-panel aside > p { font-size: 12px; }
+.customer-panel aside nav button, .admin-panel aside nav button, .logout { min-height: 44px; font-size: 13px; }
+.dashboard-banner b { font-size: 15px; }
+.dashboard-banner p, .dashboard-banner button, .no-bookings button { font-size: 13px; }
+.customer-panel section > h3 { font-size: 16px; }
+.date-box small, .customer-booking > div span, .customer-booking > i, .no-bookings p { font-size: 12px; }
+.customer-booking > div b, .customer-booking > strong { font-size: 14px; }
+.admin-panel aside > span { font-size: 11px; }
+.admin-panel aside nav button i { font-size: 10px; }
+.admin-top h2 { font-size: 31px; }
+.admin-user > span, .admin-user b { font-size: 13px; }
+.admin-user small { font-size: 11px; }
+.stats-grid small, .stats-grid i { font-size: 12px; }
+.stats-grid b { font-size: 23px; }
+.chart-card h3, .top-tours h3 { font-size: 15px; }
+.chart-card select, .months, .top-tours > div > span, .top-tours strong { font-size: 11px; }
+.top-tours b, .top-tours small { font-size: 12px; }
+.table-tools input, .table-tools button, td { font-size: 13px; }
+th, .status { font-size: 11px; }
+.catalog-head p { font-size: 13px; }
+.admin-tour-grid article span { font-size: 11px; }
+.admin-tour-grid article h3, .admin-tour-grid article footer b { font-size: 15px; }
+.admin-tour-grid article p { font-size: 12px; }
+button:focus-visible, a:focus-visible, input:focus-visible, select:focus-visible, textarea:focus-visible {
+  outline: 3px solid rgba(37, 126, 106, .35);
+  outline-offset: 3px;
+}
+
 @keyframes fade { from { opacity: 0; } }
 @keyframes up { from { opacity: 0; transform: translateY(15px); } }
 @keyframes toast { from { transform: translate(-50%, -12px); opacity: 0; } }
@@ -347,32 +456,36 @@ td small { display: block; color: var(--muted); margin-top: 3px; }
 
 @media (max-width: 720px) {
   .wrap { width: min(calc(100% - 30px), 1180px); }
-  .utility-inner { overflow: hidden; }
-  .utility-inner > span:not(:first-child) { display: none; }
-  .nav { height: 72px; }
-  .brand { width: 123px; }
-  .brand img { height: 52px; }
-  .nav-links { top: 103px; }
+  .utility { display: none; }
+  .nav { height: 76px; }
+  .brand { width: 138px; }
+  .brand img { height: 58px; }
+  .nav-links { top: 76px; gap: 4px; padding: 22px 20px 26px; }
+  .nav-links a { width: 100%; min-height: 48px; display: flex; align-items: center; font-size: 16px; border-bottom: 1px solid var(--line); }
+  .mobile-account { width: 100%; min-height: 48px; margin-top: 10px; border: 0; border-radius: 10px; background: var(--forest); color: white; display: block; font-size: 15px; font-weight: 800; }
   .small-button, .account-link { display: none; }
-  .hero { min-height: 690px; background-position: 58% center; align-items: flex-start; padding-top: 92px; }
+  .hero { display: block; min-height: 0; overflow: hidden; background-position: 60% center; padding: 60px 0 24px; }
   .hero-overlay { background: linear-gradient(90deg, rgba(5,37,33,.94), rgba(5,37,33,.64) 75%, rgba(5,37,33,.35)); }
   .hero-content { padding-bottom: 0; }
-  .hero h1 { font-size: 57px; }
-  .hero-content > p { font-size: 15px; max-width: 345px; }
-  .hero-proof { display: grid; gap: 8px; }
-  .search-panel { bottom: -185px; }
+  .hero h1 { max-width: 100%; font-size: clamp(40px, 11.5vw, 52px); line-height: 1; margin: 16px 0 20px; }
+  .hero-content > p { max-width: 360px; font-size: 17px; line-height: 1.65; }
+  .mobile-break { display: inline; }
+  .hero-proof { display: grid; grid-template-columns: 1fr; gap: 12px; margin-top: 24px; font-size: 13px; }
+  .hero-proof span { min-width: 0; }
+  .search-panel { position: relative; inset: auto; transform: none; margin-top: 38px; width: min(calc(100% - 30px), 1180px); }
   .search-tabs { padding-left: 4px; }
-  .search-grid { grid-template-columns: 1fr; padding: 17px; }
+  .search-tabs button { padding-inline: 12px; font-size: 13px; }
+  .search-grid { grid-template-columns: 1fr; padding: 18px; }
   .search-grid .field:nth-child(3) { display: none; }
   .search-button { width: 100%; }
-  .trust-strip { padding-top: 220px; }
+  .trust-strip { padding: 38px 0; }
   .trust-grid { grid-template-columns: 1fr 1fr; gap: 18px 0; }
   .trust-grid div:nth-child(2) { border: 0; }
   .trust-grid div { flex-direction: column; gap: 3px; }
   .section { padding: 75px 0; }
   .section-head { display: block; }
-  .section-head h2, .why-copy h2, .transfer-copy h2 { font-size: 38px; }
-  .section-head > p { margin-top: 17px; }
+  .section-head h2, .why-copy h2, .transfer-copy h2 { font-size: 38px; line-height: 1.08; }
+  .section-head > p { margin-top: 18px; font-size: 16px; }
   .tour-tools { display: block; }
   .category-pills { margin-bottom: 13px; }
   .mini-search { width: 100%; }
@@ -416,7 +529,12 @@ td small { display: block; color: var(--muted); margin-top: 3px; }
 }
 
 @media (max-width: 420px) {
-  .hero h1 { font-size: 49px; }
+  .hero h1 { font-size: 40px; }
   .tour-grid { grid-template-columns: 1fr; }
   .stats-grid, .admin-tour-grid { grid-template-columns: 1fr; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; }
 }

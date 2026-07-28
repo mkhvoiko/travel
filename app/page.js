@@ -36,7 +36,7 @@ function Logo() {
 
 function Modal({ open, onClose, children, wide = false }) {
   if (!open) return null;
-  return <div className="modal-backdrop" onMouseDown={onClose}><div className={`modal ${wide ? "modal-wide" : ""}`} onMouseDown={(e) => e.stopPropagation()}><button className="close-btn" onClick={onClose} aria-label="Close"><X /></button>{children}</div></div>;
+  return <div className="modal-backdrop" onMouseDown={onClose}><div className={`modal ${wide ? "modal-wide" : ""}`} role="dialog" aria-modal="true" onMouseDown={(e) => e.stopPropagation()}><button className="close-btn" onClick={onClose} aria-label="Close dialog"><X /></button>{children}</div></div>;
 }
 
 function Stars({ rating, reviews }) {
@@ -179,11 +179,12 @@ export default function Home() {
           <a href="#transfers" onClick={() => setMenuOpen(false)}>Transfers</a>
           <a href="#why-us" onClick={() => setMenuOpen(false)}>Why us</a>
           <a href="#stories" onClick={() => setMenuOpen(false)}>Traveller stories</a>
+          <button className="mobile-account" onClick={() => { setMenuOpen(false); openDashboard(); }}>{user ? "Open my account" : "Log in or sign up"}</button>
         </nav>
         <div className="nav-actions">
           <button className="account-link" onClick={openDashboard}>{user ? <User size={17} /> : <LogIn size={17} />}{user ? user.name.split(" ")[0] : "Log in"}</button>
           <a className="button sunny small-button" href="#experiences">Explore tours</a>
-          <button className="menu-btn" onClick={() => setMenuOpen(!menuOpen)} aria-label="Open menu"><Menu /></button>
+          <button className="menu-btn" onClick={() => setMenuOpen(!menuOpen)} aria-label="Open navigation menu" aria-expanded={menuOpen}><Menu /></button>
         </div>
       </div>
     </header>
@@ -191,10 +192,10 @@ export default function Home() {
     <section className="hero" style={{ backgroundImage: `url("${asset("/images/hero.jpg")}")` }}>
       <div className="hero-overlay" />
       <div className="wrap hero-content">
-        <span className="kicker light"><Palmtree size={15} /> Go beyond the resort</span>
-        <h1>Feel the real<br /><em>Jamaica.</em></h1>
-        <p>Private tours, effortless transfers, and unforgettable island days—planned by people who call Jamaica home.</p>
-        <div className="hero-proof"><span><BadgeCheck />Local guides</span><span><ShieldCheck />Secure booking</span><span><Star />4.9 traveller rating</span></div>
+        <span className="kicker light"><Palmtree size={17} /> Jamaica, planned locally</span>
+        <h1>Your best day in<br /><em>Jamaica starts<span className="mobile-break"><br /></span> here.</em></h1>
+        <p>Choose a locally guided experience or private airport transfer, with clear pricing and help whenever you need it.</p>
+        <div className="hero-proof"><span><BadgeCheck />Trusted local hosts</span><span><ShieldCheck />Clear, upfront pricing</span><span><MessageCircle />Real guest support</span></div>
       </div>
       <div className="wrap search-panel">
         <div className="search-tabs"><button className="active"><Compass size={16} />Find an experience</button><button onClick={() => document.querySelector("#transfers").scrollIntoView({ behavior: "smooth" })}><MapPin size={16} />Book a transfer</button></div>
@@ -207,10 +208,10 @@ export default function Home() {
       </div>
     </section>
 
-    <section className="trust-strip"><div className="wrap trust-grid"><div><strong>12k+</strong><span>happy travellers</span></div><div><strong>4.9/5</strong><span>average rating</span></div><div><strong>100%</strong><span>local expertise</span></div><div><strong>24/7</strong><span>guest support</span></div></div></section>
+    <section className="trust-strip" aria-label="Why book with us"><div className="wrap trust-grid"><div><strong>Local</strong><span>Jamaican guides</span></div><div><strong>Simple</strong><span>clear prices</span></div><div><strong>Flexible</strong><span>hotel or villa pickup</span></div><div><strong>Helpful</strong><span>support before your trip</span></div></div></section>
 
     <section className="section experiences wrap" id="experiences">
-      <div className="section-head"><div><span className="kicker">Made for good stories</span><h2>Jamaica’s most-loved <em>experiences.</em></h2></div><p>Handpicked adventures led by people who know every shortcut, story, and secret swimming spot.</p></div>
+      <div className="section-head"><div><span className="kicker">Explore your way</span><h2>Choose your kind of <em>Jamaica.</em></h2></div><p>Compare memorable island days by location, interest, duration, and price—then reserve in a few simple steps.</p></div>
       <div className="tour-tools">
         <div className="category-pills">{categories.map((c) => <button key={c} className={category === c ? "active" : ""} onClick={() => setCategory(c)}>{c}</button>)}</div>
         <label className="mini-search"><Search size={17} /><input value={search} onChange={(e) => setSearch(e.target.value)} placeholder="Search tours" /></label>
@@ -234,8 +235,8 @@ export default function Home() {
 
     <section className="section why wrap" id="why-us">
       <div className="why-image" style={{ backgroundImage: `url("${asset("/images/walking-two.jpg")}")` }}><span className="floating-review"><Stars rating="5.0" reviews="2,400+" /><b>“The Jamaica we hoped to find.”</b><small>— Claire, Toronto</small></span></div>
-      <div className="why-copy"><span className="kicker">Travel with heart</span><h2>Not just a tour.<br /><em>A local connection.</em></h2><p>We started Love Travel Jamaica to share the island we know: generous, creative, surprising, and full of stories. Every booking supports local guides and communities.</p>
-        <div className="why-list"><div><span><Users /></span><div><b>People, not scripts</b><p>Warm, knowledgeable guides who make every day personal.</p></div></div><div><span><Map /></span><div><b>Plans with breathing room</b><p>Thoughtful itineraries, flexible pacing, zero tourist traps.</p></div></div><div><span><ShieldCheck /></span><div><b>Looked after, always</b><p>Clear pricing, reliable transport, and support whenever you need it.</p></div></div></div>
+      <div className="why-copy"><span className="kicker">Designed around you</span><h2>Easy to book.<br /><em>Personal when it matters.</em></h2><p>Start with a clear itinerary, know what is included, and travel with a local team that can adapt the day to your group.</p>
+        <div className="why-list"><div><span><Users /></span><div><b>Small groups, genuine hosts</b><p>Knowledgeable local guides who make the experience feel personal.</p></div></div><div><span><Map /></span><div><b>Useful details before checkout</b><p>Duration, pickup options, inclusions, and pricing are easy to compare.</p></div></div><div><span><ShieldCheck /></span><div><b>Support from planning to pickup</b><p>Get practical help before the trip and a reliable contact on the day.</p></div></div></div>
       </div>
     </section>
 
