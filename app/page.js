@@ -220,9 +220,12 @@ export default function Home() {
           <button className="mobile-account" onClick={() => { setMenuOpen(false); openDashboard(); }}>{user ? t("openAccount") : t("loginSignup")}</button>
         </nav>
         <div className="nav-actions">
-          <div className="language-switcher" role="group" aria-label={t("languageLabel")}>
-            <button className={`lang-en ${language === "en" ? "active" : ""}`} style={{ "--flag": `url("${asset("/images/flag-us.svg")}")` }} onClick={() => changeLanguage("en")} aria-label="EN — English (United States)" aria-pressed={language === "en"}><span>EN</span></button>
-            <button className={`lang-ru ${language === "ru" ? "active" : ""}`} style={{ "--flag": `url("${asset("/images/flag-ru.svg")}")` }} onClick={() => changeLanguage("ru")} aria-label="RU — Русский" aria-pressed={language === "ru"}><span>RU</span></button>
+          <div className={`language-switcher is-${language}`} role="group" aria-label={t("languageLabel")}>
+            <button className={`language-label ${language === "en" ? "active" : ""}`} onClick={() => changeLanguage("en")} aria-label="EN — English (United States)" aria-pressed={language === "en"}>EN</button>
+            <button className="language-track" style={{ "--flag": `url("${asset(language === "en" ? "/images/flag-us.svg" : "/images/flag-ru.svg")}")` }} onClick={() => changeLanguage(language === "en" ? "ru" : "en")} aria-label={language === "en" ? "Switch to Russian" : "Switch to English"}>
+              <span className="language-knob" aria-hidden="true" />
+            </button>
+            <button className={`language-label ${language === "ru" ? "active" : ""}`} onClick={() => changeLanguage("ru")} aria-label="RU — Русский" aria-pressed={language === "ru"}>RU</button>
           </div>
           <button className="account-link" onClick={openDashboard}>{user ? <User size={17} /> : <LogIn size={17} />}{user ? user.name.split(" ")[0] : t("login")}</button>
           <a className="button sunny small-button" href="#experiences">{t("exploreTours")}</a>
