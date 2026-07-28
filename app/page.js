@@ -15,11 +15,11 @@ const BASE_PATH = process.env.NEXT_PUBLIC_BASE_PATH || "";
 const asset = (path) => `${BASE_PATH}${path}`;
 
 const BASE_TOURS = [
-  { id: 1, title: "Blue Hole & Secret Falls", location: "Ocho Rios", category: "Adventure", duration: "5 hours", price: 129, rating: 4.9, reviews: 184, image: asset("/images/blue-hole.jpg"), badge: "Bestseller", description: "Swim in turquoise pools, climb hidden waterfalls, and discover one of Jamaica’s most refreshing natural escapes.", includes: ["Private round-trip transfer", "Local guide", "Entry fees", "Bottled water"] },
-  { id: 2, title: "Kingston Culture Walk", location: "Kingston", category: "Culture", duration: "3 hours", price: 65, rating: 4.8, reviews: 96, image: asset("/images/walking-one.jpg"), badge: "Local favourite", description: "See Kingston through local eyes—music, murals, markets, architecture, and stories beyond the guidebooks.", includes: ["Expert city guide", "Local tasting", "Museum entry", "Small group"] },
-  { id: 3, title: "Rose Hall After Dark", location: "Montego Bay", category: "History", duration: "3.5 hours", price: 92, rating: 4.7, reviews: 121, image: asset("/images/rose-hall.jpg"), badge: "Iconic", description: "Explore Jamaica’s legendary great house at twilight and hear the unforgettable story of the White Witch.", includes: ["Hotel pickup", "Guided great-house tour", "Welcome drink", "Return transfer"] },
+  { id: 1, title: "Blue Hole & Secret Falls", location: "Ocho Rios", category: "Adventure", duration: "5 hours", price: 129, rating: 4.9, reviews: 184, image: asset("/images/blue-hole.webp"), badge: "Bestseller", description: "Swim in turquoise pools, climb hidden waterfalls, and discover one of Jamaica’s most refreshing natural escapes.", includes: ["Private round-trip transfer", "Local guide", "Entry fees", "Bottled water"] },
+  { id: 2, title: "Kingston Culture Walk", location: "Kingston", category: "Culture", duration: "3 hours", price: 65, rating: 4.8, reviews: 96, image: asset("/images/walking-one.webp"), badge: "Local favourite", description: "See Kingston through local eyes—music, murals, markets, architecture, and stories beyond the guidebooks.", includes: ["Expert city guide", "Local tasting", "Museum entry", "Small group"] },
+  { id: 3, title: "Rose Hall After Dark", location: "Montego Bay", category: "History", duration: "3.5 hours", price: 92, rating: 4.7, reviews: 121, image: asset("/images/rose-hall.webp"), badge: "Iconic", description: "Explore Jamaica’s legendary great house at twilight and hear the unforgettable story of the White Witch.", includes: ["Hotel pickup", "Guided great-house tour", "Welcome drink", "Return transfer"] },
   { id: 4, title: "Island Flavours & Coast", location: "Negril", category: "Food & culture", duration: "6 hours", price: 145, rating: 5.0, reviews: 77, image: asset("/images/tour-beach.jpg"), badge: "New", description: "A relaxed day of coastal views, local food, colourful communities, and one of the Caribbean’s best sunsets.", includes: ["Private driver", "Lunch tasting", "Beach stop", "Sunset experience"] },
-  { id: 5, title: "Hidden Jamaica Discovery", location: "Falmouth", category: "Nature", duration: "4 hours", price: 110, rating: 4.9, reviews: 58, image: asset("/images/walking-two.jpg"), badge: "Private tour", description: "Leave the resort road behind for lush countryside, river views, and meaningful encounters with local Jamaica.", includes: ["Private guide", "Air-conditioned transfer", "Refreshments", "Flexible itinerary"] },
+  { id: 5, title: "Hidden Jamaica Discovery", location: "Falmouth", category: "Nature", duration: "4 hours", price: 110, rating: 4.9, reviews: 58, image: asset("/images/walking-two.webp"), badge: "Private tour", description: "Leave the resort road behind for lush countryside, river views, and meaningful encounters with local Jamaica.", includes: ["Private guide", "Air-conditioned transfer", "Refreshments", "Flexible itinerary"] },
   { id: 6, title: "Falls, River & Village Day", location: "Montego Bay", category: "Adventure", duration: "7 hours", price: 165, rating: 4.8, reviews: 143, image: asset("/images/tour-falls.jpg"), badge: "Full day", description: "A full-day island adventure combining cool river water, dramatic falls, and warm Jamaican hospitality.", includes: ["Hotel pickup", "All admissions", "Jamaican lunch", "Certified guide"] }
 ];
 
@@ -32,7 +32,7 @@ const SEED_BOOKINGS = [
 const categories = ["All experiences", "Adventure", "Culture", "Nature", "History", "Food & culture"];
 
 function Logo() {
-  return <button className="brand" onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}><img src={asset("/images/logo.png")} alt="Love Travel Jamaica" /></button>;
+  return <button className="brand" onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}><img src={asset("/images/logo.webp")} alt="Love Travel Jamaica" width="328" height="158" /></button>;
 }
 
 function Modal({ open, onClose, children, wide = false, closeLabel = "Close dialog" }) {
@@ -47,8 +47,8 @@ function Stars({ rating, reviews }) {
 function TourCard({ tour, language, t, onBook, onDetails }) {
   const displayTour = localizeTour(tour, language);
   return <article className="tour-card">
-    <button className="tour-image" onClick={() => onDetails(tour)} style={{ backgroundImage: `url("${tour.image}")` }} aria-label={`${t("viewTour")} ${displayTour.title}`}>
-      <span className="tour-badge">{displayTour.badge}</span><span className="heart"><Heart size={18} /></span>
+    <button className="tour-image" onClick={() => onDetails(tour)} style={{ backgroundImage: `url("${tour.image}")` }} aria-label={`${displayTour.badge}. ${t("viewTour")} ${displayTour.title}`}>
+      <span className="tour-badge" aria-hidden="true">{displayTour.badge}</span><span className="heart" aria-hidden="true"><Heart size={18} /></span>
     </button>
     <div className="tour-body">
       <div className="tour-meta"><span><MapPin size={13} />{displayTour.location}</span><Stars rating={tour.rating} reviews={tour.reviews} /></div>
@@ -220,7 +220,10 @@ export default function Home() {
           <button className="mobile-account" onClick={() => { setMenuOpen(false); openDashboard(); }}>{user ? t("openAccount") : t("loginSignup")}</button>
         </nav>
         <div className="nav-actions">
-          <div className="language-switcher" aria-label={t("languageLabel")}><button className={language === "en" ? "active" : ""} onClick={() => changeLanguage("en")} aria-pressed={language === "en"}>EN</button><button className={language === "ru" ? "active" : ""} onClick={() => changeLanguage("ru")} aria-pressed={language === "ru"}>RU</button></div>
+          <div className="language-switcher" role="group" aria-label={t("languageLabel")}>
+            <button className={`lang-en ${language === "en" ? "active" : ""}`} style={{ "--flag": `url("${asset("/images/flag-us.svg")}")` }} onClick={() => changeLanguage("en")} aria-label="EN — English (United States)" aria-pressed={language === "en"}><span>EN</span></button>
+            <button className={`lang-ru ${language === "ru" ? "active" : ""}`} style={{ "--flag": `url("${asset("/images/flag-ru.svg")}")` }} onClick={() => changeLanguage("ru")} aria-label="RU — Русский" aria-pressed={language === "ru"}><span>RU</span></button>
+          </div>
           <button className="account-link" onClick={openDashboard}>{user ? <User size={17} /> : <LogIn size={17} />}{user ? user.name.split(" ")[0] : t("login")}</button>
           <a className="button sunny small-button" href="#experiences">{t("exploreTours")}</a>
           <button className="menu-btn" onClick={() => setMenuOpen(!menuOpen)} aria-label={t("menuLabel")} aria-expanded={menuOpen}><Menu /></button>
@@ -228,7 +231,8 @@ export default function Home() {
       </div>
     </header>
 
-    <section className="hero" style={{ backgroundImage: `url("${asset("/images/hero-premium.jpg")}")` }}>
+    <section className="hero">
+      <img className="hero-image" src={asset("/images/hero-premium.webp")} srcSet={`${asset("/images/hero-premium-720.webp")} 720w, ${asset("/images/hero-premium-900.webp")} 900w, ${asset("/images/hero-premium.webp")} 1440w`} sizes="100vw" alt="" width="1440" height="810" loading="eager" fetchPriority="high" decoding="async" />
       <div className="hero-overlay" />
       <div className="wrap hero-content">
         <span className="kicker light"><Palmtree size={17} /> {t("heroKicker")}</span>
@@ -273,7 +277,7 @@ export default function Home() {
     </section>
 
     <section className="section why wrap" id="why-us">
-      <div className="why-image" style={{ backgroundImage: `url("${asset("/images/walking-two.jpg")}")` }}><span className="floating-review"><Stars rating="5.0" reviews="2,400+" /><b>{t("reviewQuote")}</b><small>{t("reviewAuthor")}</small></span></div>
+      <div className="why-image" style={{ backgroundImage: `url("${asset("/images/walking-two.webp")}")` }}><span className="floating-review"><Stars rating="5.0" reviews="2,400+" /><b>{t("reviewQuote")}</b><small>{t("reviewAuthor")}</small></span></div>
       <div className="why-copy"><span className="kicker">{t("designedForYou")}</span><h2>{t("easyBook")}<br /><em>{t("personal")}</em></h2><p>{t("whyText")}</p>
         <div className="why-list"><div><span><Users /></span><div><b>{t("smallGroups")}</b><p>{t("smallGroupsText")}</p></div></div><div><span><Map /></span><div><b>{t("usefulDetails")}</b><p>{t("usefulDetailsText")}</p></div></div><div><span><ShieldCheck /></span><div><b>{t("planningSupport")}</b><p>{t("planningSupportText")}</p></div></div></div>
       </div>
