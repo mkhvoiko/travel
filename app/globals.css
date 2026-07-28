@@ -166,6 +166,8 @@ footer .brand { filter: brightness(0) invert(1); }
 .subscribe input { min-width: 0; width: 100%; border: 0; background: transparent; color: white; padding: 11px; outline: 0; }
 .subscribe button { border: 0; width: 40px; background: var(--sun); color: var(--forest); cursor: pointer; }
 .footer-bottom { border-top: 1px solid #244941; padding-top: 22px; display: flex; justify-content: space-between; color: #6f8e86; font-size: 9px; }
+.footer-bottom a { color: inherit; font-weight: 700; text-decoration: none; }
+.footer-bottom a:hover { color: #f7c948; }
 
 .modal-backdrop { position: fixed; inset: 0; z-index: 100; background: rgba(5, 32, 28, .78); backdrop-filter: blur(8px); display: grid; place-items: center; padding: 22px; animation: fade .2s ease-out; }
 .modal { width: min(480px, 100%); max-height: calc(100vh - 44px); overflow: auto; background: var(--paper); border-radius: 17px; padding: 34px; position: relative; box-shadow: 0 35px 90px rgba(0,0,0,.3); animation: up .25s ease-out; }
