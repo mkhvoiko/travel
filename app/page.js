@@ -224,7 +224,7 @@ export default function Home() {
       </div>
     </header>
 
-    <section className="hero" style={{ backgroundImage: `url("${asset("/images/hero-premium.png")}")` }}>
+    <section className="hero" style={{ backgroundImage: `url("${asset("/images/hero-premium.jpg")}")` }}>
       <div className="hero-overlay" />
       <div className="wrap hero-content">
         <span className="kicker light"><Palmtree size={17} /> {t("heroKicker")}</span>
