@@ -89,10 +89,18 @@ export default function Home() {
     const savedUser = localStorage.getItem("ltj-user");
     const savedBookings = localStorage.getItem("ltj-bookings");
     const savedLanguage = localStorage.getItem("ltj-language");
-    const preferredLanguage = navigator.languages?.some((item) => item.toLowerCase().startsWith("ru")) ? "ru" : "en";
+    const requestedLanguage = new URLSearchParams(window.location.search).get("lang");
+    const browserLanguages = [navigator.language, ...(navigator.languages || [])].filter(Boolean);
+    const preferredLanguage = browserLanguages.some((item) => item.toLowerCase().startsWith("ru")) ? "ru" : "en";
     if (savedUser) setUser(JSON.parse(savedUser));
     if (savedBookings) setBookings(JSON.parse(savedBookings));
-    setLanguage(savedLanguage === "ru" || savedLanguage === "en" ? savedLanguage : preferredLanguage);
+    setLanguage(
+      requestedLanguage === "ru" || requestedLanguage === "en"
+        ? requestedLanguage
+        : savedLanguage === "ru" || savedLanguage === "en"
+          ? savedLanguage
+          : preferredLanguage
+    );
   }, []);
 
   useEffect(() => {
@@ -117,6 +125,9 @@ export default function Home() {
   function changeLanguage(nextLanguage) {
     setLanguage(nextLanguage);
     localStorage.setItem("ltj-language", nextLanguage);
+    const url = new URL(window.location.href);
+    url.searchParams.set("lang", nextLanguage);
+    window.history.replaceState({}, "", url);
   }
 
   function toast(message) {
@@ -213,7 +224,7 @@ export default function Home() {
       </div>
     </header>
 
-    <section className="hero" style={{ backgroundImage: `url("${asset("/images/hero.jpg")}")` }}>
+    <section className="hero" style={{ backgroundImage: `url("${asset("/images/hero-premium.png")}")` }}>
       <div className="hero-overlay" />
       <div className="wrap hero-content">
         <span className="kicker light"><Palmtree size={17} /> {t("heroKicker")}</span>
