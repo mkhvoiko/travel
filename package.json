@@ -5,12 +5,17 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build && node scripts/package-sites.mjs",
-    "start": "next start"
+    "start": "next start",
+    "deploy:worker": "npm run build && wrangler deploy",
+    "check:worker": "npm run build && wrangler deploy --dry-run"
   },
   "dependencies": {
     "lucide-react": "^0.468.0",
     "next": "16.2.9",
     "react": "19.2.0",
     "react-dom": "19.2.0"
+  },
+  "devDependencies": {
+    "wrangler": "^4.115.0"
   }
 }

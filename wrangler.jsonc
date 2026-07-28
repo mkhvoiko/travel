@@ -1,0 +1,10 @@
+{
+  "$schema": "./node_modules/wrangler/config-schema.json",
+  "name": "travel",
+  "main": "./sites-runtime/index.js",
+  "compatibility_date": "2026-07-28",
+  "assets": {
+    "directory": "./out",
+    "binding": "ASSETS"
+  }
+}
